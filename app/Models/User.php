@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Models\Concerns\CausesActivity;
 use Spatie\Permission\Traits\HasRoles;
-use Spatie\Activitylog\Traits\CausesActivity;
 use Lab404\Impersonate\Models\Impersonate;
 
 class User extends Authenticatable
