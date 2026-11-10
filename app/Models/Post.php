@@ -28,6 +28,71 @@ class Post extends Model
         'published_at' => 'datetime',
     ];
 
+    /**
+     * The database stores these fields as translation JSON, while the rest
+     * of the application continues to use them as strings.
+     */
+    public function getTitleAttribute($value): ?string
+    {
+        return $this->localizedText($value);
+    }
+
+    public function setTitleAttribute($value): void
+    {
+        $this->attributes['title'] = $this->jsonText($value);
+    }
+
+    public function getExcerptAttribute($value): ?string
+    {
+        return $this->localizedText($value);
+    }
+
+    public function setExcerptAttribute($value): void
+    {
+        $this->attributes['excerpt'] = $this->jsonText($value);
+    }
+
+    public function getContentAttribute($value): ?string
+    {
+        return $this->localizedText($value);
+    }
+
+    public function setContentAttribute($value): void
+    {
+        $this->attributes['content'] = $this->jsonText($value);
+    }
+
+    private function localizedText($value): ?string
+    {
+        if ($value === null) {
+            return null;
+        }
+
+        $translations = is_array($value) ? $value : json_decode($value, true);
+        if (!is_array($translations)) {
+            // Support legacy rows that still contain plain text.
+            return (string) $value;
+        }
+
+        $locale = app()->getLocale();
+        $text = $translations[$locale] ?? $translations['id'] ?? reset($translations);
+
+        return $text === false || $text === null ? null : (string) $text;
+    }
+
+    private function jsonText($value): ?string
+    {
+        if ($value === null) {
+            return null;
+        }
+
+        $translations = is_array($value)
+            ? $value
+            : ['id' => (string) $value, 'en' => (string) $value];
+
+        return json_encode($translations, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }
+
 
     public function getActivitylogOptions(): LogOptions
     {
