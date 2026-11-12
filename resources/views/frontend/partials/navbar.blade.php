@@ -1,7 +1,7 @@
 <div class="top-menu-wrapper">
     <div class="container d-flex justify-content-between align-items-center py-2" style="font-size: 0.85rem; font-weight: 500;">
         {{-- Left Side: Top Menu Items --}}
-        <div class="top-menu-items d-none d-md-flex">
+        {{--<div class="top-menu-items d-none d-md-flex">
             @if(isset($sharedMenus['top-menu']) && $sharedMenus['top-menu']->items->count() > 0)
                 @foreach($sharedMenus['top-menu']->items as $item)
                     <a href="{{ $item->resolved_url }}"
@@ -12,7 +12,7 @@
                     </a>
                 @endforeach
             @endif
-        </div>
+        </div>--}}
 
         {{-- Right Side: Utilities (Lang, Theme, Auth) --}}
         <div class="d-flex align-items-center gap-3 top-utilities ms-auto">
