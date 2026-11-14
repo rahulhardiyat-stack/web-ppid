@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Testing\Fluent\Concerns\Has;
@@ -34,5 +35,19 @@ class Pemohon extends Model
     protected $casts = [
         'nik' => 'encrypted'
     ];
+
+    public static function truncate()
+    {
+    }
+
+    public function permohonan(): HasMany
+    {
+        return $this->hasMany(Permohonan::class);
+    }
+
+    public function routeNotificationForMail()
+    {
+        return $this->email;
+    }
 
 }

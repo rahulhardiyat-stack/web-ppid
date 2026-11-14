@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string('no_tiket')->unique();
             $table->foreignUuid('pemohon_id')
                 ->constrained('pemohon')
-                ->cascadeOnDelete()
-                ->restrictOnDelete();
+                ->cascadeOnDelete();
             $table->text('rincian_informasi');
             $table->text('tujuan');
             $table->string('cara_memperoleh', 20);

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Pemohon;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,6 +25,8 @@ class DatabaseSeeder extends Seeder
             MenuSeeder::class,
             AccreditationSeeder::class,
             FacultySeeder::class,
+            PermohonanSeeder::class,
+            PemohonSeeder::class,
         ]);
     }
 }

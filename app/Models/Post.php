@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Activitylog\Models\Concerns\LogsActivity;
-use Spatie\Activitylog\LogOptions;
 use App\Traits\LocaleFilter;
+use Spatie\Activitylog\Support\LogOptions;
 
 class Post extends Model
 {

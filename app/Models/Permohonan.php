@@ -6,6 +6,7 @@ use App\Enums\PermohonanStatus;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
@@ -37,5 +38,15 @@ class Permohonan extends Model
         'tgl_final'       => 'date',
         'diperpanjang'    => 'boolean',
     ];
+
+    public function pemohon(): BelongsTo
+    {
+        return $this->belongsTo(Pemohon::class);
+    }
+
+    public function routeNotificationForMail()
+    {
+        return $this->pemohon->email;
+    }
 
 }
