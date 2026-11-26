@@ -56,6 +56,10 @@ return [
             'throw' => false,
         ],
 
+        'private' => [
+            'driver' => 'local', 'root' => storage_path('app/ppid'), 'throw' => false
+        ],
+
     ],
 
     /*
@@ -72,5 +76,7 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
     ],
+
+
 
 ];

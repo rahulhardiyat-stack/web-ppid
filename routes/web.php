@@ -38,8 +38,31 @@ use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\ResearchServiceController;
 use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Public\PermohonanController;
 
 Route::view('/test', 'test');
+
+Route::view('/permohonan', 'frontend.ppid.permohonan.create');
+
+Route::prefix('ppid')->name('ppid.')->group(function () {
+    Route::get('permohonan', [PermohonanController::class, 'create'])->name('permohonan.create');
+    Route::post('permohonan', [PermohonanController::class, 'store'])
+        ->middleware('throttle:5,1')->name('permohonan.store');
+    Route::get('permohonan/sukses', [PermohonanController::class, 'sukses'])
+        ->name('permohonan.sukses');
+
+
+    /* Route::get('cek', [Public\CekPermohonanController::class, 'index'])->name('cek');
+     Route::post('cek', [Public\CekPermohonanController::class, 'show'])
+         ->middleware('throttle:10,1')->name('cek.show');
+
+     Route::get('keberatan/{no_tiket}', [Public\KeberatanController::class, 'create'])->name('keberatan.create');
+     Route::post('keberatan', [Public\KeberatanController::class, 'store'])
+         ->middleware('throttle:5,1')->name('keberatan.store');
+
+     Route::get('berkas/{riwayat}', [Public\CekPermohonanController::class, 'unduh'])
+         ->middleware('signed')->name('berkas');*/
+});
 
 /* |-------------------------------------------------------------------------- | Admin Panel Routes (Protected) |-------------------------------------------------------------------------- */
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', \App\Http\Middleware\AdminLocale::class])->group(function () {
@@ -65,7 +88,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', \App\Htt
 
     // Announcements
     Route::resource('announcements', AnnouncementController::class);
-    
+
     //accreditations
     Route::resource('accreditations', AccreditationController::class);
 
@@ -210,11 +233,11 @@ Route::group([
     Route::get('/kontak', [ContactController::class , 'index'])->name('contact.index');
     Route::post('/kontak', [ContactController::class , 'store'])->name('contact.store');
     Route::get('/cari', [FrontInfoPageController::class , 'search'])->name('search');
-    
+
     // Akreditasi
     Route::get('/akreditasi', [FrontInfoPageController::class , 'accreditation'] )->name('accreditation');
     Route::get('/akreditasi/{id}/download', [FrontInfoPageController::class , 'downloadAccreditation'] )->name('accreditation.public-download');
-    
+
     // Sitemap & Robots
     Route::get('/sitemap.xml', [HomeController::class , 'sitemap'])->name('sitemap');
     Route::get('/robots.txt', [HomeController::class , 'robots'])->name('robots');

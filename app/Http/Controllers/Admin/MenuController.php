@@ -132,8 +132,8 @@ class MenuController extends Controller
         ]);
 
         // Clear existing items to recreate them from the builder
-        // Or realistically, just iterate and update them, but usually 
-        // a simple builder sends the entire list back and recreating is easier 
+        // Or realistically, just iterate and update them, but usually
+        // a simple builder sends the entire list back and recreating is easier
         // if IDs aren't strictly preserved, but let's assume it sends standard properties.
 
         // Simpler approach for a nestable builder array:
